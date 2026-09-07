@@ -21,6 +21,7 @@ body {
 	padding: 0.5rem;
 	border: 0.3rem solid #444444;
 	border-radius: 25px;
+	box-shadow: 0.3rem 0.3rem #CCCCCC;
 }
 section {
 	margin: 0 0 0.5rem 0;
@@ -66,4 +67,13 @@ hr {
 	color: #444444;
 	width: 3rem;
 	height: 3rem;
+}
+
+#lastline {
+	color: #555555;
+	font-size: 0.5rem;
+	font-weight: 300;
+	text-align: center;
+	line-height: 1;
+	margin: 0;
 }
