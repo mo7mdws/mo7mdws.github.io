@@ -13,14 +13,19 @@ body {
 .nobreak {
 	white-space: nowrap;
 }
+
 .box {
 	width: 85%;
 	max-width: 1000px;
-	margin: 0 auto;
+	margin: 0 auto 15px auto;
 	padding: 0.5rem;
 	border: 0.3rem solid #444444;
 	border-radius: 25px;
 }
+section {
+	margin: 0 0 0.5rem 0;
+}
+
 .title {
 	color: #444444;
 	text-align: center;
@@ -29,4 +34,36 @@ body {
 h1 {
 	font-size: 2rem;
 	font-weight: 500;
+}
+h2 {
+	font-size: 1.5rem;
+	font-weight: 400;
+}
+p {
+	color: #000000;
+	line-height: 1.2;
+	font-size: 1rem;
+	font-weight: 300;
+	margin: 0 0 0.5rem 0;
+}
+
+hr {
+	width: 13ch;
+	height: 0.2rem;
+	margin: 0.25rem auto 0.5rem auto;
+	border: none;
+	background-color: #444444;
+}
+
+#accounts {
+	width: 12rem;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.account svg {
+	color: #444444;
+	width: 3rem;
+	height: 3rem;
 }
