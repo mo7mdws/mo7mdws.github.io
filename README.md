@@ -5,6 +5,6 @@ You can visit the website here ( [mo7mdws.github.io](https://mo7mdws.github.io/)
 The goal of this website is to tell the world who I am. For that reason. I wanted visitors to focus on the text as much as possible. I went with a simple black and white design. avoiding lots of colors. and kept everything minimal. just text and a few lines, without images or fancy designs.
 ## Future Plans
 Here are a few things I'd like to work on in the near future. listed in order of priority :
-1. **Add Arabic language support.**
+1. **Add Arabic language support.** ✅
 2. **Add posts... of course.**
 3. **Try to add a dark mode.**
