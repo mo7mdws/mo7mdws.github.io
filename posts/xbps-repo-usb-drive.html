@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="UTF-8">
+		<title>XBPS Repo on USB Drive</title>
+		<meta name="viewport" content="width=device-width, inital-scale=1.0">
+		<link rel="stylesheet" href="../style.css">
+		<!-- FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&family=Readex+Pro:wght@160..700&family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
+	</head>
+	
+	<body>
+		<header class="box">
+			<h1>XBPS Repo on <span class="nobreak">USB Drive</span></h1>
+		</header>
+		<main class="box">
+			<section>
+				<p>
+					As a Void Linux user, I always felt the need for a local package repository that 
+					lets me install the packages I want at any time and on any device without delays 
+					and without needing a continuous internet connection. For this reason, I turned 
+					one of my USB drives into a portable local XBPS repository.
+				</p>
+			</section>
+			
+			<section>
+				<h2>Why Local Repo</h2>
+				<p>There were several reasons that drove me to create a local repository, most notably:-</p>
+				<dl>
+					<div>
+						<dt>1- Slow Internet</dt>
+						<dd>
+							My download speed often hovered between 180 and 200 KB/s, making the process 
+							of downloading packages (even small ones) take a very long time.
+						</dd>
+					</div>
+					
+					<div>
+						<dt>2- Repeated Downloads</dt>
+						<dd>
+							Due to my passion for tinkering and technical experiments, I frequently reinstalled 
+							the OS on multiple devices, I found myself downloading the same packages over and 
+							over again, which wasted time, consumed bandwidth, and slowed down my learning process.
+						</dd>
+					</div>
+					
+					<div>
+						<dt>3- My Country's Internet Service</dt>
+						<dd>
+							Constant price hikes for internet packages, data capping policies, frequent outages 
+							(such as government-enforced internet blackouts during exam seasons), and the 
+							blocking of important websites (like archive.org), all of these factors made me 
+							lose trust in the internet in my country. This pushed me to strive for self-reliance 
+							and host everything I need locally.
+						</dd>
+					</div>
+				</dl>
+			</section>
+			
+			<section>
+				<h2>Why USB Drive</h2>
+				<p>
+					Initially, the plan was to turn my old HP laptop into a home server to host various services, 
+					including an XBPS repository. But due to some hardware and battery issues, I postponed the server 
+					project for now and started with something simpler. That is why I chose a USB Drive as a quick and 
+					simple temporary solution.
+				</p>
+			</section>
+			
+			<section>
+				<h2>What I Did</h2>
+				<div class="note">This is not a tutorial, it is just a walkthrough of the steps I took.</div>
+				<p>
+					I used an 8GB SanDisk Cruzer Blade USB drive and created a single 8GB partition with the ext4 
+					filesystem, since I will be using it only with Linux devices. After inserting it into my laptop, 
+					I identified its name using lsblk and mounted it to a specific directory, let's say 
+					(/home/USER/myrepo).
+				</p>
+				<p>Now, I can download the packages I need using xbps-install</p>
+				<code dir="ltr">xbps-install -D -c /home/USER/myrepo PKGNAME</code>
+				<p>Next, I create the repository index using xbps-rindex</p>
+				<code dir="ltr">xbps-rindex -a /home/USER/myrepo/*.xbps</code>
+				<p>
+					At this point, I can search for packages inside the repository using xbps-query. 
+					For example, to list all packages in the repository
+				</p>
+				<code dir="ltr">xbps-query -Ris --repository /home/USER/myrepo ""</code>
+				<p>After that, I can install any package I want using xbps-install</p>
+				<div class="note">This process requires root permissions.</div>
+				<code dir="ltr">xbps-install -i -c /home/USER/myrepo -R /home/USER/myrepo PKGNAME</code>
+				<p>
+					When I want to update the packages in the repository. I download the newer version 
+					using xbps-install (like the first step) and add it to the index using xbps-rindex 
+					(like the second step). At this point, xbps-rindex takes care of adding the new packages 
+					and removing the index entries for the old ones. But the old package files will still 
+					exist in the repository folder (USB drive), they can be removed up using xbps-rindex
+				</p>
+				<code dir="ltr">xbps-rindex -r /home/username/myrepo/</code>
+				<p>Once finished, I can unmount the USB drive using umount and unplug it.</p>
+			</section>
+			
+			<section>
+				<h2>What is Next</h2>
+				<p>
+					I know this method is simple and it is not the best way to create a repository, but it is just 
+					a temporary solution for learning. The next step (after fixing my old laptop) will be to create 
+					a local server that hosts multiple services, and one of them will be an XBPS repository.
+				</p>
+			</section>
+		</main>
+		<footer>
+			<p id="lastLine">
+				<b>
+				This website uses <span class="nobreak">( Mitr font )</span> for English pages, 
+				and <span class="nobreak">( Readex Pro font )</span> for Arabic pages,
+				and <span class="nobreak">( Roboto Mono font )</span> for codes,
+				and <span class="nobreak">( Remix Icons )</span> for the icons.
+				</b>
+			</p>
+		</footer>
+	</body>
+</html>

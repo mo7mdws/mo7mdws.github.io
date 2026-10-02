@@ -6,5 +6,5 @@ The goal of this website is to tell the world who I am. For that reason. I wante
 ## Future Plans
 Here are a few things I'd like to work on in the near future. listed in order of priority :
 1. **Add Arabic language support.** ✅
-2. **Add posts... of course.**
+2. **Add posts... of course.** ✅
 3. **Try to add a dark mode.**

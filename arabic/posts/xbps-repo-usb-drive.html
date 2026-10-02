@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+	<head>
+		<meta charset="UTF-8">
+		<title>XBPS Repo on USB Drive</title>
+		<meta name="viewport" content="width=device-width, inital-scale=1.0">
+		<link rel="stylesheet" href="../../style.css">
+		<!-- FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&family=Readex+Pro:wght@160..700&family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
+	</head>
+	
+	<body>
+		<header class="box">
+			<h1>مستودع XBPS على فلاشة</span></h1>
+		</header>
+		<main class="box">
+			<section>
+				<p>
+					كمستخدم Void Linux, كنت دائماً اشعر بالحاجة لمستودع حزم محلي مما يسمح لي بتثبيت 
+					الحزم التي اريدها في اي وقت و على اي جهاز دون تاخير و دون الحاجة لاتصال مستمر 
+					بالانترنت. لهذا السبب, حولت احد الفلاشات التي لدي الى مستودع محلي محمول.
+				</p>
+			</section>
+			
+			<section>
+				<h2>لماذا مستودع محلي</h2>
+				<p>هناك العديد من الاسباب التي دفعتني لانشاء مستودع محلي, ابرزهم:-</p>
+				<dl>
+					<div>
+						<dt>1- الانترنت البطيء</dt>
+						<dd>
+							سرعة التنزيل لدي كانت غالباً تتراوح بين 180 الى 200 كيلوبايت في 
+							الثانية, مما يجعل عملية تنزيل الحزم (حتى الصغيرة منها) تاخذ وقتاً 
+							طويلاً جداً.
+						</dd>
+					</div>
+					
+					<div>
+						<dt>2- تكرار التنزيلات</dt>
+						<dd>
+							بسبب شغفي للتجارب التقنية, كنت اعيد تثبيت نظام التشغيل بشكل متكرر 
+							على اجهزة متعددة, وجدت نفسي انزل نفس الحزم مراراً وتكراراً, مما يضيع 
+							الوقت, يستهلك باقة الانترنت, ويبطئ عملية التعلم.
+						</dd>
+					</div>
+					
+					<div>
+						<dt>3- خدمة الانترنت في بلدي</dt>
+						<dd>
+							الارتفاع المستمر في سعر باقات الانترنت, سياسة تحديد سعة البيانات, 
+							الانقطاعات المتكررة للانترنت (مثل القطع الحكومي للانترنت في فترة 
+							الامتحانات), و حظر المواقع المهمة (مثل archive.org), كل هذه العوامل 
+							جعلتني افقد الثقة بالانترنت في بلدي. مما دفعني لاجتهد للاستقلالية و 
+							استضافة كل شيء احتاجه محلياً.
+						</dd>
+					</div>
+				</dl>
+			</section>
+			
+			<section>
+				<h2>لماذا فلاشة</h2>
+				<p>
+					في البداية, الخطة كانت تحويل لابتوب HP القديم الخاص بي الى سيرفر منزلي لاستضافة 
+					خدمات عديدة من ضمنها مستودع XBPS. لكن بسبب بعض المشاكل في العتاد و البطارية, 
+					اجلت مشروع السيرفر الان و بدأت بشيء ابسط. لهذا انا اخترت الفلاشة كحل بسيط ومؤقت.
+				</p>
+			</section>
+			
+			<section>
+				<h2>ماذا فعلت</h2>
+				<div class="note">هذا ليس درس تعليمي, انه فقط شرح للخطوات التي اتبعتها.</div>
+				<p>
+					استخدمت فلاشة 8GB SanDisk Cruzer Blade و انشأت تقسيم (partition) واحد بحجم 8GB 
+					بنظام ملفات (filesystem) ext4 بما انني ساستخدمها مع اجهزة Linux فقط. بعد وضعها 
+					في لابتوبي, تعرفت على اسمها باستخدام lsblk و قمت بعمل mount لها في مجلد محدد, لنقل 
+					انه (/home/USER/myrepo).
+				</p>
+				<p>الان, يمكنني تنزيل الحزم التي احتاجها باستخدام xbps-install</p>
+				<code dir="ltr">xbps-install -D -c /home/USER/myrepo PKGNAME</code>
+				<p>بعدها, اقوم بانشاء فهرس (index) المستودع باستخدام xbps-rindex</p>
+				<code dir="ltr">xbps-rindex -a /home/USER/myrepo/*.xbps</code>
+				<p>
+					عند هذه النقطة, يمكنني البحث على حزم داخل المستودع باستخدام xbps-query. على سبيل 
+					المثال, لعرض كل الحزم في المستودع
+				</p>
+				<code dir="ltr">xbps-query -Ris --repository /home/USER/myrepo ""</code>
+				<p>بعد ذلك, يمكنني تثبيت اي حزمة اريدها باستخدام xbps-install</p>
+				<div class="note">هذه العملية تحتاج صلاحيات الـroot.</div>
+				<code dir="ltr">xbps-install -i -c /home/USER/myrepo -R /home/USER/myrepo PKGNAME</code>
+				<p>
+					عندما اريد تحديث الحزم في المستودع. اقوم بتنزيل احدث اصدار باستخدام xbps-install 
+					(كما في الخطوة الاولى) و اقوم باضافتهم للفهرس (index) باستخدام xbps-rindex 
+					(كما في الخطوة الثانية). عند هذه النقطة, xbps-rindex سيتولى اضافة الحزم الجديدة 
+					وحذف الـentries الخاصة بالحزم القديمة من الفهرس (index). لكن ملفات الحزم القديمة 
+					ستبقى موجودة في مجلد المستودع (الفلاشة), يمكن حذفهم باستخدام xbps-remove
+				</p>
+				<code dir="ltr">xbps-rindex -r /home/USER/myrepo/</code>
+				<p>بعد الانتهاء, يمكنني فك الفلاشة باستخدام umount وبعدها افصلها.</p>
+			</section>
+			
+			<section>
+				<h2>ما التالي</h2>
+				<p>
+					اعرف بان هذه الطريقة بسيطة و ليست افضل طريقة لانشاء مستودع, لكنها حل مؤقت للتعلم. 
+					الخطوة القادمة (بعد اصلاح لابتوبي القديم) ساقوم بانشاء سيرفر محلي يستضيف العديد من 
+					الخدمات, و ستكون واحدة منهم مستودع XBPS.
+				</p>
+			</section>
+		</main>
+		<footer>
+			<p id="lastLine">
+				<b>
+				هذا الموقع يستخدم <span class="nobreak">( Mitr font )</span> للصفحات الانجليزية,
+					و <span class="nobreak">( Readex Pro font )</span> للصفحات العربية,
+					و <span class="nobreak">( Roboto Mono font)</span> للاكواد,
+					و <span class="nobreak">( Remix Icon )</span> للايقونات.
+				</b>
+			</p>
+		</footer>
+	</body>
+</html>
